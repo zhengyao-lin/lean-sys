@@ -73,8 +73,13 @@ fn main() {
             }
             println!("cargo:rustc-link-arg=-Wl,--end-group");
         }
-        for lib in ["Lake", "c++", "c++abi"] {
-            println!("cargo:rustc-link-lib=static={lib}");
+        println!("cargo:rustc-link-lib=static=Lake");
+        for lib in ["c++", "c++abi"] {
+            if cfg!(target_os = "macos") {
+                println!("cargo:rustc-link-lib=dylib={lib}");
+            } else {
+                println!("cargo:rustc-link-lib=static={lib}");
+            }
         }
         for lib in ["m", "dl", "gmp"] {
             println!("cargo:rustc-link-lib=dylib={lib}");
