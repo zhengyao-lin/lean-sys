@@ -24,6 +24,7 @@ pub unsafe fn lean_string_byte_size(o: *mut lean_object) -> usize {
 
 /** instance : inhabited char := ⟨'A'⟩ */
 #[inline(always)]
+#[allow(clippy::char_lit_as_u8)]
 pub fn lean_char_default_value() -> c_char {
     'A' as c_char
 }
